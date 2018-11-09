@@ -16,6 +16,8 @@ gradle-app.setting
 .project
 settings/
 .settings
+#ignore everything in logs folder
 logs
 out/
+.DS_Store
 
