@@ -6,6 +6,6 @@ public class JavertxTest {
 
     @Test
     public void main() {
-        
+
     }
 }
