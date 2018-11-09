@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '1.2.3'
+}
+
+apply plugin: "jacoco"
+
+group 'com.tesco.cec'
+version '1.0.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+version = '3.5.0'
+
+mainClassName = 'Javertx'
+
+shadowJar {
+    classifier = 'fat'
+    manifest {
+
+    }
+    mergeServiceFiles {
+
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jacocoTestReport {
+    group = "Reporting"
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.destination "${buildDir}/reports/coverage"
+    }
+    afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: it,  exclude: ['com/nextgencec/lib/AppInjector.class','com/tesco/cec/gatekeeper/dtos/*.class','com/nextgencec/models/*.class','com/nextgencec/lib/App.class','com/nextgencec/lib/Routes.class','com/nextgencec/models/Status.class','com/nextgencec/models/DBUser.class'])
+        })
+    }
+}
